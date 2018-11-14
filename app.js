@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -11,11 +13,11 @@ var mysql = require("mysql");
 //Database connection
 app.use(function(req, res, next){
 	res.locals.connection = mysql.createConnection({
-		host     : 'localhost',
-		port     : 3308,
-		user     : 'root',
-		password : 'root',
-		database : 'car-partner-1'
+		host     : process.env.DB_HOST,
+		port     : process.env.DB_PORT,
+		user     : process.env.DB_USER,
+		password : process.env.DB_PASS,
+		database : process.env.DB_NAME
 	});
 	res.locals.connection.connect();
 	next();
